@@ -2,6 +2,8 @@ import React,{useState} from 'react';
 import {View,Image,Text,TextInput, SafeAreaView} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
+import './styles';
+import {Header} from './components/header'
 const DATA=[
   {
     id:"1" ,
@@ -43,11 +45,9 @@ const DATA=[
  
 ];
 const Item = ({ title, picture, price }) => (
-  <View style={{padding: 10,
-    marginVertical: 8,
-    marginHorizontal: 16,backgroundColor:'#e86f13',flexDirection:'row',flex:1}}>
-    <Text style={{fontSize: 10}}>{ title}</Text>
-    <Text style={{fontSize: 10}}>{price}</Text>
+  <View style={styles.item}>
+    <Text style={styles.title}>{ title}</Text>
+    <Text style={styles.title}>{price}</Text>
     <Image source={{uri:picture,height:30,width:30}}/>
   </View>
 );
@@ -73,17 +73,17 @@ const App = () =>{
   
 
     return(
-      <View style={{padding:20}}>
+      <View style={styles.container}>
+        <header/>
         
-         <View style={{flex:1,flexDirection:'row',padding:10}}>
-            <Image source={require('./assets/favicon.png')} style={{width:30,height:30,padding:50}}/>
-            <Text style={{fontSize:20,fontWeight:'bold',textAlign:'right',paddingLeft:'50%'}} onPress={onPressPrivacy}>Privacy Policy</Text>
-            <Text style={{fontSize:20,fontWeight:'bold',textAlign:'right',paddingLeft:'20%'}} onPress={onPressContacts}>Contacts</Text>
-              
+         <View style={styles.header}>
+            <Image source={require('./assets/favicon.png')} style={styles.image}/>
+            <Text style={styles.privacy} onPress={onPressPrivacy}>Privacy Policy</Text>
+            <Text style={styles.contact} onPress={onPressContacts}>Contacts</Text>
           </View>
       
 
-       <View style={{flex:1,flexDirection:'column'}}>
+       <View style={styles.search}>
          <TextInput
               style={{
                 height: 40,
@@ -94,9 +94,9 @@ const App = () =>{
               onChangeText={onChangeText}
               />
         </View>
-        <View stye={{flex:2,flexDirection:'row',}}>
-          <Text style={{fontSize:50,fontWeight:'bold'}}>Trending Products</Text>
-          <Text style={{fontSize:10,fontWeight:'bold'}} onPress={onPressMore}>see all</Text>
+        <View style={styles.itemlist}>
+          <Text style={styles.heading}>Trending Products</Text>
+          <Text style={styles.seeall} onPress={onPressMore}>see all</Text>
           <SafeAreaView>
           <FlatList
           data={DATA}
